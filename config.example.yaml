@@ -1,0 +1,13 @@
+environment: 'development'
+
+urlsModuleOptions:
+  keyLength: 8
+  cacheTtl: 0
+
+redis:
+  host: 'localhost'
+  port: 6379
+
+http:
+  host: 'localhost'
+  port: 3000

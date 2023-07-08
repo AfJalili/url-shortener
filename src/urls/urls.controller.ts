@@ -36,8 +36,6 @@ export class UrlsController {
     if (!url) {
       throw new NotFoundException('There is no such URL!');
     }
-    return {
-      url,
-    };
+    return { url };
   }
 }
