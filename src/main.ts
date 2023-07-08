@@ -9,7 +9,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableShutdownHooks();
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api/v1');
   app.enableVersioning({
     type: VersioningType.URI,
   });

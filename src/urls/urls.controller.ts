@@ -12,11 +12,21 @@ import { UrlsService } from './urls.service';
 import { ShortenUrlRequestDto } from './dto/shorten-url-request.dto';
 import { ShortenUrlResponseDto } from './dto/shorten-url-response.dto';
 import { isURL } from 'class-validator';
-
+import {
+  ApiBody,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+@ApiTags('urls')
 @Controller('urls')
 export class UrlsController {
   constructor(private readonly urlsService: UrlsService) {}
 
+  @ApiOperation({ summary: 'Shorten a URL' })
+  @ApiBody({ type: ShortenUrlRequestDto })
+  @ApiResponse({ status: 200, type: ShortenUrlResponseDto })
   @Post('shorten')
   async shortenUrl(
     @Body() requestDto: ShortenUrlRequestDto,
@@ -29,6 +39,10 @@ export class UrlsController {
     };
   }
 
+  @ApiOperation({ summary: 'Redirect to a URL' })
+  @ApiParam({ name: 'id', description: 'ID of the URL' })
+  @ApiResponse({ status: 200, description: 'URL Found' })
+  @ApiResponse({ status: 404, description: 'URL Not Found' })
   @Get(':id')
   @Redirect()
   async redirect(@Param('id') id: string) {
