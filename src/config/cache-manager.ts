@@ -8,7 +8,6 @@ export default {
   useFactory: (configService: ConfigService) => {
     const redisConfig = configService.get<RedisConfig>('redis');
     return {
-      isGlobal: true,
       store: redisStore,
       host: redisConfig.host,
       port: redisConfig.port,

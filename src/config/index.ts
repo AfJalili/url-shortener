@@ -9,7 +9,7 @@ import { validateSync } from 'class-validator';
 const YAML_CONFIG_FILENAME = 'config.yaml';
 
 function configLoader(): Record<string, any> {
-  return yaml.load(readFileSync(join(__dirname, YAML_CONFIG_FILENAME), 'utf8'));
+  return yaml.load(readFileSync(join(YAML_CONFIG_FILENAME), 'utf8'));
 }
 
 function configValidator(config: Record<string, unknown>) {
