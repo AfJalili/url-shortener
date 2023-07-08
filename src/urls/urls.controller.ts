@@ -19,6 +19,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 @ApiTags('urls')
 @Controller('urls')
 export class UrlsController {
@@ -27,6 +28,7 @@ export class UrlsController {
   @ApiOperation({ summary: 'Shorten a URL' })
   @ApiBody({ type: ShortenUrlRequestDto })
   @ApiResponse({ status: 200, type: ShortenUrlResponseDto })
+  @Throttle(60, 60)
   @Post('shorten')
   async shortenUrl(
     @Body() requestDto: ShortenUrlRequestDto,
@@ -43,8 +45,9 @@ export class UrlsController {
   @ApiParam({ name: 'id', description: 'ID of the URL' })
   @ApiResponse({ status: 200, description: 'URL Found' })
   @ApiResponse({ status: 404, description: 'URL Not Found' })
-  @Get(':id')
+  @Throttle(20, 60)
   @Redirect()
+  @Get(':id')
   async redirect(@Param('id') id: string) {
     const url: string = await this.urlsService.findOne(id);
     if (!url) {
