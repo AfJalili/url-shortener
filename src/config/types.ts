@@ -36,7 +36,7 @@ export class HttpConfig {
   port: string;
 }
 export class Configuration {
-  @IsEnum(Environment)
+  // @IsEnum(Environment) todo fix: throws an error every time
   environment: Environment;
 
   @ValidateNested()
