@@ -1,13 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
-import { VersioningType } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { HttpConfig } from './config/types';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors();
+  app.useGlobalPipes(new ValidationPipe());
   app.enableShutdownHooks();
   app.setGlobalPrefix('api/v1');
   app.enableVersioning({
@@ -24,4 +26,5 @@ async function bootstrap() {
   const httpConfig = app.get(ConfigService).get<HttpConfig>('http');
   await app.listen(httpConfig.port, httpConfig.host);
 }
+
 bootstrap();
