@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
 import { UrlsService } from './urls.service';
 import { UrlsController } from './urls.controller';
-import { CacheModule } from '@nestjs/cache-manager';
-import cacheModuleOptions from '../config/cache-manager';
+import { StorageService } from '../storage/storage.service';
 @Module({
-  imports: [CacheModule.register(cacheModuleOptions)],
+  imports: [],
   controllers: [UrlsController],
-  providers: [UrlsService],
+  providers: [UrlsService, StorageService],
 })
 export class UrlsModule {}

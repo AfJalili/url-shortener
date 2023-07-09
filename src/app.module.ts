@@ -3,6 +3,7 @@ import { UrlsModule } from './urls/urls.module';
 import configModuleOptions from './config';
 import { ConfigModule } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { StorageService } from './storage/storage.service';
 
 @Module({
   imports: [
@@ -11,6 +12,6 @@ import { ThrottlerModule } from '@nestjs/throttler';
     UrlsModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [StorageService],
 })
 export class AppModule {}

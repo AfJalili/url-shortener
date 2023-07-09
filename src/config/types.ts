@@ -14,18 +14,12 @@ export enum Environment {
 
 export class UrlsModuleOptions {
   @IsNumber()
-  cacheTtl = 0; // milliseconds.
-
-  @IsNumber()
   keyLength = 8;
 }
 
 export class RedisConfig {
   @IsString()
-  host: string;
-
-  @IsPort()
-  port: string;
+  url: string;
 }
 
 export class HttpConfig {
